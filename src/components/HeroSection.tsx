@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import avatar from '@/assets/avatar.jpg';
-import hero from '@/assets/myImage2.jpg'
+import hero from '@/assets/myImage2.jpeg'
 
 const HeroSection = () => {
   return (
