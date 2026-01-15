@@ -9,7 +9,7 @@ const HeroSection = () => {
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
       {/* Grid Background */}
-      <div className="absolute inset-0 grid-background opacity-40" />
+      <div className="absolute inset-0 grid-background opacity-90" />
       
       {/* Floating geometric shapes */}
       <motion.div
@@ -110,7 +110,7 @@ const HeroSection = () => {
                 />
               </div>
               {/* Decorative ring */}
-              <div className="absolute -inset-4 rounded-full border-2 border-dashed border-border/50 animate-spin" style={{ borderColor: '#121216', animationDuration: '30s' }} />
+              <div className="absolute -inset-4 rounded-full border-2 border-dashed border-border/50 animate-spin" style={{ borderColor: '#121216', animationDuration: '20s' }} />
             </div>
           </motion.div>
         </div>
