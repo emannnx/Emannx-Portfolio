@@ -77,10 +77,10 @@ const ContactSection = () => {
       <div className="container mx-auto px-6 mt-24">
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2024 Designer Portfolio. All rights reserved.
+            &copy; {new Date().getFullYear()} Iman Olabode Bello. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Designed with ♥ in San Francisco
+           Software Engineer specialized in creating beautiful and functional web applications.
           </p>
         </div>
       </div>
