@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import { Mail, Linkedin, Twitter, ArrowUpRight } from 'lucide-react';
 
 const socialLinks = [
-  { icon: Mail, label: 'Email', href: 'mailto:hello@example.com', username: 'hello@example.com' },
-  { icon: Linkedin, label: 'LinkedIn', href: '#', username: 'linkedin.com/in/designer' },
+  { icon: Mail, label: 'Email', href: 'mailto:imanolabodebello8@gmail.com', username: 'imanolabodebello8@gmail.com' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/iman-olabode-bello/', username: 'linkedin.com/in/Developer' },
   { icon: Twitter, label: 'Twitter', href: '#', username: '@designer' },
 ];
 
@@ -59,7 +59,7 @@ const ContactSection = () => {
           
           {/* CTA Button */}
           <motion.a
-            href="mailto:hello@example.com"
+            href="mailto:imanolabodebello8@gmail.com"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
