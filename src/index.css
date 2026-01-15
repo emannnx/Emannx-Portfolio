@@ -110,6 +110,11 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
+
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
 }
 
 @layer components {
@@ -170,3 +175,4 @@
     @apply text-base text-muted-foreground leading-relaxed;
   }
 }
+
