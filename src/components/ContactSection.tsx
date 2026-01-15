@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { Mail, Linkedin, Twitter, ArrowUpRight } from 'lucide-react';
+import { Mail, Linkedin, Twitter, ArrowUpRight, Phone } from 'lucide-react';
 
 const socialLinks = [
   { icon: Mail, label: 'Email', href: 'mailto:imanolabodebello8@gmail.com', username: 'imanolabodebello8@gmail.com' },
   { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/iman-olabode-bello/', username: 'linkedin.com/in/Developer' },
-  { icon: Twitter, label: 'Twitter', href: '#', username: '@designer' },
+  { icon: Phone, label: 'Whatsapp', href: 'https://wa.me/2347061716813?text=Hi%2C%20I%20am%20contacting%20you%20from%20your%20portfolio%20site.', username: '+2347061716813' },
 ];
 
 const ContactSection = () => {
