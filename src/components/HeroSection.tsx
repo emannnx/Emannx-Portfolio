@@ -110,7 +110,7 @@ const HeroSection = () => {
                 />
               </div>
               {/* Decorative ring */}
-              <div className="absolute -inset-4 rounded-full border-2 border-dashed border-border/50 animate-spin" style={{ animationDuration: '30s' }} />
+              <div className="absolute -inset-4 rounded-full border-2 border-dashed border-border/50 animate-spin" style={{ borderColor: '#121216', animationDuration: '30s' }} />
             </div>
           </motion.div>
         </div>
