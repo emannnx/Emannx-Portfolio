@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
-import { Home, Briefcase, User, Mail, Code2, Layers, Github } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Home,
+  Briefcase,
+  User,
+  Mail,
+  Code2,
+  Layers,
+} from 'lucide-react';
 import { useState } from 'react';
 
-interface NavItem {
-  id: string;
-  icon: React.ElementType;
-  label: string;
-}
-
-const navItems: NavItem[] = [
+const navItems = [
   { id: 'hero', icon: Home, label: 'Home' },
-  { id: 'projects', icon: Briefcase, label: 'Projects' },
+  { id: 'projects', icon: Briefcase, label: 'Work' },
   { id: 'about', icon: User, label: 'About' },
   { id: 'coding-skills', icon: Code2, label: 'Code' },
   { id: 'professional-skills', icon: Layers, label: 'Skills' },
-  { id: 'github', icon: Github, label: 'GitHub' },
   { id: 'contact', icon: Mail, label: 'Contact' },
 ];
 
@@ -23,60 +23,67 @@ interface FloatingNavProps {
   onNavigate: (id: string) => void;
 }
 
-const FloatingNav = ({ activeSection, onNavigate }: FloatingNavProps) => {
+export default function FloatingNav({
+  activeSection,
+  onNavigate,
+}: FloatingNavProps) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   return (
     <motion.nav
-      initial={{ y: 100, opacity: 0 }}
+      initial={{ y: 40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.5, duration: 0.5, ease: 'easeOut' }}
-      className="fixed bottom-3 md:left-[37.5%] -translate-x-1/2 z-50"
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+      className="fixed bottom-5 md:bottom-7 inset-x-0 z-50 flex justify-center px-4"
     >
-      <div className="nav-float flex flex-wrap justify-center items-center gap-1 px-2 py-2 rounded-full">
+      {/* floating pill */}
+      <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-background/90 backdrop-blur-md shadow-lg">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeSection === item.id;
-          const isHovered = hoveredId === item.id;
-          
+
           return (
-            <motion.button
+            <div
               key={item.id}
-              onClick={() => onNavigate(item.id)}
+              className="relative"
               onMouseEnter={() => setHoveredId(item.id)}
               onMouseLeave={() => setHoveredId(null)}
-              className={`relative flex items-center gap-2 px-4 py-2.5 rounded-full transition-colors duration-300 ${
-                isActive 
-                  ? 'text-primary' 
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              {isActive && (
-                <motion.div
-                  layoutId="activeNav"
-                  className="absolute inset-0 bg-accent rounded-full"
-                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                />
-              )}
-              <Icon className="w-5 h-5 relative z-10" />
-              {(isActive || isHovered) && (
-                <motion.span
-                  initial={{ opacity: 0, width: 0 }}
-                  animate={{ opacity: 1, width: 'auto' }}
-                  exit={{ opacity: 0, width: 0 }}
-                  className="text-sm font-medium relative z-10"
-                >
-                  {item.label}
-                </motion.span>
-              )}
-            </motion.button>
+              {/* tooltip */}
+              <AnimatePresence>
+                {hoveredId === item.id && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    className="absolute -top-10 left-1/2 -translate-x-1/2
+                               rounded-md px-3 py-1 text-xs font-medium
+                               bg-accent text-accent-foreground
+                               shadow-md whitespace-nowrap"
+                  >
+                    {item.label}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* icon button */}
+              <motion.button
+                onClick={() => onNavigate(item.id)}
+                whileTap={{ scale: 0.9 }}
+                className={`w-11 h-11 rounded-full flex items-center justify-center
+                  transition-colors duration-300
+                  ${
+                    isActive
+                      ? 'bg-accent text-primary'
+                      : 'bg-transparent text-muted-foreground hover:bg-muted'
+                  }`}
+              >
+                <Icon className="w-5 h-5" />
+              </motion.button>
+            </div>
           );
         })}
       </div>
     </motion.nav>
   );
-};
-
-export default FloatingNav;
+}
