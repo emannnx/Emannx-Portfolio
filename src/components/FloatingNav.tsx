@@ -31,7 +31,7 @@ const FloatingNav = ({ activeSection, onNavigate }: FloatingNavProps) => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.5, ease: 'easeOut' }}
-      className="fixed bottom-6 md:left-[37.5%] -translate-x-1/2 z-50"
+      className="fixed bottom-3 md:left-[37.5%] -translate-x-1/2 z-50"
     >
       <div className="nav-float flex flex-wrap justify-center items-center gap-1 px-2 py-2 rounded-full">
         {navItems.map((item) => {
