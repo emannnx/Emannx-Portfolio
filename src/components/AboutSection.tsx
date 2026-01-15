@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
-import { Figma, Palette, Layout, Smartphone, Lightbulb, Users } from 'lucide-react';
+import { Code, Cpu, GitBranch, Database, Cloud, Terminal } from 'lucide-react';
 
 const skills = [
-  { icon: Figma, name: 'Figma', description: 'Design & Prototyping' },
-  { icon: Palette, name: 'Visual Design', description: 'Color, Typography, Layout' },
-  { icon: Layout, name: 'Web Design', description: 'Responsive & Accessible' },
-  { icon: Smartphone, name: 'Mobile Design', description: 'iOS & Android' },
-  { icon: Lightbulb, name: 'UX Strategy', description: 'Research & Testing' },
-  { icon: Users, name: 'Collaboration', description: 'Cross-functional Teams' },
+  { icon: Code, name: 'TypeScript', description: 'React, Node, Next.js' },
+  { icon: Cpu, name: 'System Design', description: 'Microservices, APIs' },
+  { icon: GitBranch, name: 'Git & CI/CD', description: 'GitHub Actions, Docker' },
+  { icon: Database, name: 'Databases', description: 'PostgreSQL, Redis' },
+  { icon: Cloud, name: 'Cloud', description: 'AWS, Vercel, Serverless' },
+  { icon: Terminal, name: 'DevOps', description: 'Monitoring, IaC, k8s' },
 ];
 
 const AboutSection = () => {
@@ -29,18 +29,18 @@ const AboutSection = () => {
               About Me
             </span>
             <h2 className="heading-lg mb-6">
-              Crafting Digital<br />Experiences
+              Building Scalable<br />Software Solutions
             </h2>
             <div className="space-y-4 body-md">
               <p>
-                I'm a UX/UI designer with 5+ years of experience creating digital 
-                products that people love to use. My approach combines user research, 
-                visual design, and strategic thinking.
+                I'm a full-stack engineer with 5+ years shipping production systems
+                that serve millions. I specialize in TypeScript, React, and cloud-native
+                architectures that scale.
               </p>
               <p>
-                Currently based in San Francisco, I work with startups and enterprises 
-                to transform complex problems into elegant, intuitive solutions. When 
-                I'm not designing, you'll find me exploring photography or hiking trails.
+                Currently in San Francisco, I lead technical initiatives from zero-to-one
+                products to platform modernization. When I'm not coding, you'll catch me
+                contributing to open-source or optimizing my neovim config.
               </p>
             </div>
             
@@ -52,8 +52,8 @@ const AboutSection = () => {
                 transition={{ delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <span className="block text-4xl font-bold text-foreground font-heading">50+</span>
-                <span className="text-sm text-muted-foreground">Projects Completed</span>
+                <span className="block text-4xl font-bold text-foreground font-heading">10M+</span>
+                <span className="text-sm text-muted-foreground">Requests Handled</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -61,8 +61,8 @@ const AboutSection = () => {
                 transition={{ delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <span className="block text-4xl font-bold text-foreground font-heading">5+</span>
-                <span className="text-sm text-muted-foreground">Years Experience</span>
+                <span className="block text-4xl font-bold text-foreground font-heading">99.9%</span>
+                <span className="text-sm text-muted-foreground">Uptime Achieved</span>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -70,8 +70,8 @@ const AboutSection = () => {
                 transition={{ delay: 0.4 }}
                 viewport={{ once: true }}
               >
-                <span className="block text-4xl font-bold text-foreground font-heading">20+</span>
-                <span className="text-sm text-muted-foreground">Happy Clients</span>
+                <span className="block text-4xl font-bold text-foreground font-heading">50+</span>
+                <span className="text-sm text-muted-foreground">Code Reviews</span>
               </motion.div>
             </div>
           </motion.div>
