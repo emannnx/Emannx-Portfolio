@@ -1,58 +1,128 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import ProjectCard from './ProjectCard';
 import projectFintech from '@/assets/project-fintech.jpg';
 import projectEcommerce from '@/assets/project-ecommerce.jpg';
 import projectWellness from '@/assets/project-wellness.jpg';
 import projectTravel from '@/assets/project-travel.jpg';
+import projectResumeAI from '@/projectimages/resume.png';
+import nexxproject from '@/projectimages/nexx.png';
+import ramonikproject from '@/projectimages/ramoniktravel.png'
+import healthCareSystem from '@/projectimages/Healthhub.png'
+import sushiMan from '@/projectimages/sushiman.png'
+import springImage from '@/projectimages/SpringBoot.jpg'
+import fgClothing from '@/projectimages/fgclothings.png'
+import xSpace from '@/projectimages/x-space.png'
+
+
 
 const projects = [
   {
     id: 1,
-    title: 'FinTrack Dashboard',
+    title: 'ResumeAI',
     description:
-      'A modern fintech dashboard redesign focused on simplifying complex financial data into digestible insights.',
-    tags: ['UX Design', 'Mobile App', 'Fintech'],
-    image: projectFintech,
+      'ResumeAI is a fully customizable online resume builder that lets users design, edit, preview, and export clean professional resumes with modern UI and flexible layout control.',
+    tags: ["React", "TypeScript", "CSS", "Firebase"],
+    image: projectResumeAI,
     color: 'bg-accent',
-    liveUrl: 'https://fintrack-dashboard.vercel.app',
-    repoUrl: 'https://github.com/username/fintrack-dashboard',
+    liveUrl: 'https://emannx-resume-ai.vercel.app/',
+    repoUrl: 'https://github.com/emannnx/emannx-ResumeAI',
   },
   {
     id: 2,
-    title: 'Paralese Fashion',
+    title: 'NEXX Global',
     description:
-      'E-commerce platform redesign for a contemporary fashion brand, emphasizing minimalist aesthetics and seamless checkout.',
-    tags: ['Web Design', 'E-commerce', 'Branding'],
-    image: projectEcommerce,
+      'NEXX Global delivers forward-thinking digital solutions that help businesses and individuals grow, connect, and thrive.',
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "Api"],
+    image: nexxproject,
     color: 'bg-secondary',
-    liveUrl: 'https://paralese-fashion.vercel.app',
-    repoUrl: 'https://github.com/username/paralese-fashion',
+    liveUrl: 'https://www.nexxglobal.net/',
+    repoUrl: 'https://github.com/emannnx/N.EXX---Smart-Crypto-Trading-for-All',
   },
   {
     id: 3,
-    title: 'Mindful Wellness',
+    title: 'Ramonik Travels & Tours',
     description:
-      'Meditation and wellness app designed to promote mental health through calming interfaces and guided experiences.',
-    tags: ['Mobile App', 'Health Tech', 'UX Research'],
-    image: projectWellness,
+      'Ramonik Travel creates seamless, personalized travel experiences that turn every journey into an unforgettable adventure.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+    image: ramonikproject,
     color: 'bg-muted',
-    liveUrl: 'https://mindful-wellness.vercel.app',
-    repoUrl: 'https://github.com/username/mindful-wellness',
+    liveUrl: 'https://ramoniktravel.com/',
+    repoUrl: 'https://github.com/emannnx/Ramonik-World-Connect.git',
   },
   {
     id: 4,
-    title: 'Wanderlust Travel',
+    title: 'Sushiman',
     description:
-      'Travel booking platform that combines beautiful destination imagery with intuitive search and booking flows.',
-    tags: ['Web Design', 'Travel', 'UX Design'],
-    image: projectTravel,
+      'Sushiman delivers fresh, handcrafted sushi and Japanese-inspired meals with a commitment to quality, flavor, and exceptional customer experience.',
+    tags: ['JavaScript', 'Html', 'CSS'],
+    image: sushiMan,
     color: 'bg-accent',
-    liveUrl: 'https://wanderlust-travel.vercel.app',
-    repoUrl: 'https://github.com/username/wanderlust-travel',
+    liveUrl: 'https://sushiman-emannx.vercel.app/',
+    repoUrl: 'https://github.com/emannnx/Sushiman-emannx',
+  },
+  {
+    id: 5,
+    title: 'HealthHub – Healthcare System',
+    description:
+      'A modern and interactive platform for managing healthcare services, appointments, and patient information.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'Spring Boot', 'SSMS'],
+    image: healthCareSystem,
+    color: 'bg-accent',
+    liveUrl: 'https://health-care-systems-nine.vercel.app/',
+    repoUrl: 'https://github.com/emannnx/HealthCareSystems',
+  },
+  {
+    id: 6,
+    title: 'FG Clothings',
+    description:
+      'A curated look book site showcasing contemporary fashion collections with seasonal style inspiration.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS'],
+    image: fgClothing,
+    color: 'bg-accent',
+    liveUrl: 'https://fg-clothings.netlify.app/',
+    repoUrl: 'https://github.com/emannnx/FGClothing',
+  },
+  {
+    id: 7,
+    title: 'X-Space',
+    description:
+      'X-Space delivers innovative digital solutions designed to help individuals and businesses connect, create, and thrive in a fast-evolving tech landscape.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'CSS'],
+    image: xSpace,
+    color: 'bg-accent',
+    liveUrl: 'https://x-space-emannx.vercel.app/',
+    repoUrl: 'https://github.com/emannnx/x-space-emannx',
+  },
+  {
+    id: 8,
+    title: 'Nutrition Guide',
+    description:
+      'A Spring Boot application that provides personalized nutrition plans and dietary recommendations.',
+    tags: ["Spring Boot", "MongoDB"],
+    image: springImage,
+    color: 'bg-accent',
+    liveUrl: 'https://nutritional-guide.onrender.com',
+    repoUrl: 'https://github.com/emannnx/NutritionGuide',
+  },
+  {
+    id: 9,
+    title: 'Mood Tracker',
+    description:
+      'A Spring Boot application for tracking daily mood and overall emotional wellness',
+    tags: ["Spring Boot", "MongoDB"],
+    image: springImage,
+    color: 'bg-accent',
+    liveUrl: 'https://mood-tracker-1zvf.onrender.com',
+    repoUrl: 'https://github.com/emannnx/NutritionGuide',
   },
 ];
 
 const ProjectsSection = () => {
+  const [showAll, setShowAll] = useState(false);
+  const INITIAL_PROJECTS = 4;
+  const displayedProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS);
+
   return (
     <section id="projects" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-6">
@@ -76,10 +146,28 @@ const ProjectsSection = () => {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {displayedProjects.map((project, index) => (
             <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
+
+        {/* Load More Button */}
+        {!showAll && projects.length > INITIAL_PROJECTS && (
+          <motion.div
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <button
+              onClick={() => setShowAll(true)}
+              className="px-8 py-3 bg-accent text-accent-foreground rounded-lg font-medium hover:bg-accent/90 transition-colors"
+            >
+              Load More Projects ({projects.length - INITIAL_PROJECTS})
+            </button>
+          </motion.div>
+        )}
       </div>
     </section>
   );
