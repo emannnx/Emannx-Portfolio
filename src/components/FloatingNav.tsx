@@ -1,21 +1,14 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import {
-  Home,
-  Briefcase,
-  User,
-  Mail,
-  Code2,
-  Layers,
-} from 'lucide-react';
-import { useState } from 'react';
+import { motion, AnimatePresence } from "framer-motion";
+import { Home, Briefcase, User, Mail, Code2, Layers } from "lucide-react";
+import { useState } from "react";
 
 const navItems = [
-  { id: 'hero', icon: Home, label: 'Home' },
-  { id: 'projects', icon: Briefcase, label: 'Work' },
-  { id: 'about', icon: User, label: 'About' },
-  { id: 'coding-skills', icon: Code2, label: 'Code' },
-  { id: 'professional-skills', icon: Layers, label: 'Skills' },
-  { id: 'contact', icon: Mail, label: 'Contact' },
+  { id: "hero", icon: Home, label: "Home" },
+  { id: "projects", icon: Briefcase, label: "Work" },
+  { id: "about", icon: User, label: "About" },
+  { id: "coding-skills", icon: Code2, label: "Code" },
+  { id: "professional-skills", icon: Layers, label: "Skills" },
+  { id: "contact", icon: Mail, label: "Contact" },
 ];
 
 interface FloatingNavProps {
@@ -33,7 +26,7 @@ export default function FloatingNav({
     <motion.nav
       initial={{ y: 40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="fixed bottom-5 md:bottom-7 inset-x-0 z-50 flex justify-center px-4"
     >
       {/* floating pill */}
@@ -74,8 +67,8 @@ export default function FloatingNav({
                   transition-colors duration-300
                   ${
                     isActive
-                      ? 'bg-accent text-primary'
-                      : 'bg-transparent text-muted-foreground hover:bg-muted'
+                      ? "bg-accent text-primary"
+                      : "bg-transparent text-muted-foreground hover:bg-muted"
                   }`}
               >
                 <Icon className="w-5 h-5" />
