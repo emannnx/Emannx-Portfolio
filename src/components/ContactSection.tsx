@@ -1,10 +1,25 @@
-import { motion } from 'framer-motion';
-import { Mail, Linkedin, Twitter, ArrowUpRight, Phone } from 'lucide-react';
+import { motion } from "framer-motion";
+import { Mail, Linkedin, Twitter, ArrowUpRight, Phone } from "lucide-react";
 
 const socialLinks = [
-  { icon: Mail, label: 'Email', href: 'mailto:imanolabodebello8@gmail.com', username: 'imanolabodebello8@gmail.com' },
-  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/iman-olabode-bello/', username: 'linkedin.com/in/Developer' },
-  { icon: Phone, label: 'Whatsapp', href: 'https://wa.me/2347061716813?text=Hi%2C%20I%20am%20contacting%20you%20from%20your%20portfolio%20site.', username: '+2347061716813' },
+  {
+    icon: Mail,
+    label: "Email",
+    href: "mailto:imanolabodebello8@gmail.com",
+    username: "imanolabodebello8@gmail.com",
+  },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/iman-olabode-bello/",
+    username: "linkedin.com/in/Developer",
+  },
+  {
+    icon: Phone,
+    label: "Whatsapp",
+    href: "https://wa.me/2347061716813?text=Hi%2C%20I%20am%20contacting%20you%20from%20your%20portfolio%20site.",
+    username: "+2347061716813",
+  },
 ];
 
 const ContactSection = () => {
@@ -22,13 +37,15 @@ const ContactSection = () => {
             Get in Touch
           </span>
           <h2 className="heading-lg mb-6">
-            Let's Create<br />Something Amazing
+            Let's Create
+            <br />
+            Something Amazing
           </h2>
           <p className="body-lg mb-12">
-            Have a project in mind? I'd love to hear about it. Let's discuss 
-            how we can work together to bring your vision to life.
+            Have a project in mind? I'd love to hear about it. Let's discuss how
+            we can work together to bring your vision to life.
           </p>
-          
+
           {/* Contact Links */}
           <div className="flex flex-col md:flex-row gap-4 justify-center mb-12">
             {socialLinks.map((link, index) => {
@@ -48,15 +65,19 @@ const ContactSection = () => {
                     <Icon className="w-5 h-5 text-accent-foreground group-hover:text-primary-foreground transition-colors duration-300" />
                   </div>
                   <div className="text-left">
-                    <span className="block text-sm text-muted-foreground">{link.label}</span>
-                    <span className="block font-medium text-foreground">{link.username}</span>
+                    <span className="block text-sm text-muted-foreground">
+                      {link.label}
+                    </span>
+                    <span className="block font-medium text-foreground">
+                      {link.username}
+                    </span>
                   </div>
                   <ArrowUpRight className="w-5 h-5 text-muted-foreground ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.a>
               );
             })}
           </div>
-          
+
           {/* CTA Button */}
           <motion.a
             href="mailto:imanolabodebello8@gmail.com"
@@ -72,15 +93,17 @@ const ContactSection = () => {
           </motion.a>
         </motion.div>
       </div>
-      
+
       {/* Footer */}
       <div className="container mx-auto px-6 mt-24">
         <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            &copy; {new Date().getFullYear()} Iman Olabode Bello. All rights reserved.
+            &copy; {new Date().getFullYear()} Iman Olabode Bello. All rights
+            reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-           Software Engineer specialized in creating beautiful and functional web applications.
+            Software Engineer specialized in creating beautiful and functional
+            web applications.
           </p>
         </div>
       </div>
