@@ -1,127 +1,134 @@
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import ProjectCard from './ProjectCard';
-import projectFintech from '@/assets/project-fintech.jpg';
-import projectEcommerce from '@/assets/project-ecommerce.jpg';
-import projectWellness from '@/assets/project-wellness.jpg';
-import projectTravel from '@/assets/project-travel.jpg';
-import projectResumeAI from '@/projectimages/resume.png';
-import nexxproject from '@/projectimages/nexx.png';
-import ramonikproject from '@/projectimages/ramoniktravel.png'
-import healthCareSystem from '@/projectimages/Healthhub.png'
-import sushiMan from '@/projectimages/sushiman.png'
-import springImage from '@/projectimages/SpringBoot.jpg'
-import fgClothing from '@/projectimages/fgclothings.png'
-import xSpace from '@/projectimages/x-space.png'
-
-
+import { motion } from "framer-motion";
+import { useState } from "react";
+import ProjectCard from "./ProjectCard";
+import projectFintech from "@/assets/project-fintech.jpg";
+import projectEcommerce from "@/assets/project-ecommerce.jpg";
+import projectWellness from "@/assets/project-wellness.jpg";
+import projectTravel from "@/assets/project-travel.jpg";
+import projectResumeAI from "@/projectimages/resume.png";
+import nexxproject from "@/projectimages/nexx.png";
+import ramonikproject from "@/projectimages/ramoniktravel.png";
+import healthCareSystem from "@/projectimages/Healthhub.png";
+import sushiMan from "@/projectimages/sushiman.png";
+import springImage from "@/projectimages/SpringBoot.jpg";
+import fgClothing from "@/projectimages/fgclothings.png";
+import xSpace from "@/projectimages/x-space.png";
 
 const projects = [
   {
     id: 1,
-    title: 'ResumeAI',
+    title: "ResumeAI",
     description:
-      'ResumeAI is a fully customizable online resume builder that lets users design, edit, preview, and export clean professional resumes with modern UI and flexible layout control.',
+      "ResumeAI is a fully customizable online resume builder that lets users design, edit, preview, and export clean professional resumes with modern UI and flexible layout control.",
     tags: ["React", "TypeScript", "CSS", "Firebase"],
     image: projectResumeAI,
-    color: 'bg-accent',
-    liveUrl: 'https://emannx-resume-ai.vercel.app/',
-    repoUrl: 'https://github.com/emannnx/emannx-ResumeAI',
+    color: "bg-accent",
+    liveUrl: "https://emannx-resume-ai.vercel.app/",
+    repoUrl: "https://github.com/emannnx/emannx-ResumeAI",
   },
   {
     id: 2,
-    title: 'NEXX Global',
+    title: "NEXX Global",
     description:
-      'NEXX Global delivers forward-thinking digital solutions that help businesses and individuals grow, connect, and thrive.',
+      "NEXX Global delivers forward-thinking digital solutions that help businesses and individuals grow, connect, and thrive.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "Api"],
     image: nexxproject,
-    color: 'bg-secondary',
-    liveUrl: 'https://www.nexxglobal.net/',
-    repoUrl: 'https://github.com/emannnx/N.EXX---Smart-Crypto-Trading-for-All',
+    color: "bg-secondary",
+    liveUrl: "https://www.nexxglobal.net/",
+    repoUrl: "https://github.com/emannnx/N.EXX---Smart-Crypto-Trading-for-All",
   },
   {
     id: 3,
-    title: 'Ramonik Travels & Tours',
+    title: "Ramonik Travels & Tours",
     description:
-      'Ramonik Travel creates seamless, personalized travel experiences that turn every journey into an unforgettable adventure.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase'],
+      "Ramonik Travel creates seamless, personalized travel experiences that turn every journey into an unforgettable adventure.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
     image: ramonikproject,
-    color: 'bg-muted',
-    liveUrl: 'https://ramoniktravel.com/',
-    repoUrl: 'https://github.com/emannnx/Ramonik-World-Connect.git',
+    color: "bg-muted",
+    liveUrl: "https://ramoniktravel.com/",
+    repoUrl: "https://github.com/emannnx/Ramonik-World-Connect.git",
   },
   {
     id: 4,
-    title: 'Sushiman',
+    title: "Sushiman",
     description:
-      'Sushiman delivers fresh, handcrafted sushi and Japanese-inspired meals with a commitment to quality, flavor, and exceptional customer experience.',
-    tags: ['JavaScript', 'Html', 'CSS'],
+      "Sushiman delivers fresh, handcrafted sushi and Japanese-inspired meals with a commitment to quality, flavor, and exceptional customer experience.",
+    tags: ["JavaScript", "Html", "CSS"],
     image: sushiMan,
-    color: 'bg-accent',
-    liveUrl: 'https://sushiman-emannx.vercel.app/',
-    repoUrl: 'https://github.com/emannnx/Sushiman-emannx',
+    color: "bg-accent",
+    liveUrl: "https://sushiman-emannx.vercel.app/",
+    repoUrl: "https://github.com/emannnx/Sushiman-emannx",
   },
   {
     id: 5,
-    title: 'HealthHub – Healthcare System',
+    title: "HealthHub – Healthcare System",
     description:
-      'A modern and interactive platform for managing healthcare services, appointments, and patient information.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'Spring Boot', 'SSMS'],
+      "A modern and interactive platform for managing healthcare services, appointments, and patient information.",
+    tags: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Spring Boot",
+      "SSMS",
+    ],
     image: healthCareSystem,
-    color: 'bg-accent',
-    liveUrl: 'https://health-care-systems-nine.vercel.app/',
-    repoUrl: 'https://github.com/emannnx/HealthCareSystems',
+    color: "bg-accent",
+    liveUrl: "https://health-care-systems-nine.vercel.app/",
+    repoUrl: "https://github.com/emannnx/HealthCareSystems",
   },
   {
     id: 6,
-    title: 'FG Clothings',
+    title: "FG Clothings",
     description:
-      'A curated look book site showcasing contemporary fashion collections with seasonal style inspiration.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS'],
+      "A curated look book site showcasing contemporary fashion collections with seasonal style inspiration.",
+    tags: ["React", "TypeScript", "Tailwind CSS"],
     image: fgClothing,
-    color: 'bg-accent',
-    liveUrl: 'https://fg-clothings.netlify.app/',
-    repoUrl: 'https://github.com/emannnx/FGClothing',
+    color: "bg-accent",
+    liveUrl: "https://fg-clothings.netlify.app/",
+    repoUrl: "https://github.com/emannnx/FGClothing",
   },
   {
     id: 7,
-    title: 'X-Space',
+    title: "X-Space",
     description:
-      'X-Space delivers innovative digital solutions designed to help individuals and businesses connect, create, and thrive in a fast-evolving tech landscape.',
-    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Firebase', 'CSS'],
+      "X-Space delivers innovative digital solutions designed to help individuals and businesses connect, create, and thrive in a fast-evolving tech landscape.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "CSS"],
     image: xSpace,
-    color: 'bg-accent',
-    liveUrl: 'https://x-space-emannx.vercel.app/',
-    repoUrl: 'https://github.com/emannnx/x-space-emannx',
+    color: "bg-accent",
+    liveUrl: "https://x-space-emannx.vercel.app/",
+    repoUrl: "https://github.com/emannnx/x-space-emannx",
   },
   {
     id: 8,
-    title: 'Nutrition Guide',
+    title: "Nutrition Guide",
     description:
-      'A Spring Boot application that provides personalized nutrition plans and dietary recommendations.',
+      "A Spring Boot application that provides personalized nutrition plans and dietary recommendations.",
     tags: ["Spring Boot", "MongoDB"],
     image: springImage,
-    color: 'bg-accent',
-    liveUrl: 'https://nutritional-guide.onrender.com',
-    repoUrl: 'https://github.com/emannnx/NutritionGuide',
+    color: "bg-accent",
+    liveUrl: "https://nutritional-guide.onrender.com",
+    repoUrl: "https://github.com/emannnx/NutritionGuide",
   },
   {
     id: 9,
-    title: 'Mood Tracker',
+    title: "Mood Tracker",
     description:
-      'A Spring Boot application for tracking daily mood and overall emotional wellness',
+      "A Spring Boot application for tracking daily mood and overall emotional wellness",
     tags: ["Spring Boot", "MongoDB"],
     image: springImage,
-    color: 'bg-accent',
-    liveUrl: 'https://mood-tracker-1zvf.onrender.com',
-    repoUrl: 'https://github.com/emannnx/NutritionGuide',
+    color: "bg-accent",
+    liveUrl: "https://mood-tracker-1zvf.onrender.com",
+    repoUrl: "https://github.com/emannnx/NutritionGuide",
   },
 ];
 
 const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
   const INITIAL_PROJECTS = 4;
-  const displayedProjects = showAll ? projects : projects.slice(0, INITIAL_PROJECTS);
+  const displayedProjects = showAll
+    ? projects
+    : projects.slice(0, INITIAL_PROJECTS);
 
   return (
     <section id="projects" className="py-24 md:py-32 relative">
@@ -139,8 +146,8 @@ const ProjectsSection = () => {
           </span>
           <h2 className="heading-lg mb-4">Featured Projects</h2>
           <p className="body-lg max-w-2xl mx-auto">
-            A collection of projects that showcase my passion for creating intuitive,
-            beautiful, and user-centered digital experiences.
+            A collection of projects that showcase my passion for creating
+            intuitive, beautiful, and user-centered digital experiences.
           </p>
         </motion.div>
 
