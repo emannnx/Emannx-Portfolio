@@ -1,16 +1,30 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const codingSkills = [
-  "HTML", "CSS", "JavaScript", "TypeScript", "Java",
-  "React", "React Native", "Expo", "NativeWind",
-  "Tailwind CSS", "Node.js", "Firebase", "REST APIs", "Git & GitHub",
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "TypeScript",
+  "Java",
+  "React",
+  "React Native",
+  "Expo",
+  "NativeWind",
+  "Tailwind CSS",
+  "Node.js",
+  "Firebase",
+  "REST APIs",
+  "Git & GitHub",
 ];
 
 const CodingSkillsSection = () => {
   return (
-    <section id="coding-skills" className="py-24 md:py-32 bg-background relative">
+    <section
+      id="coding-skills"
+      className="py-24 md:py-32 bg-background relative"
+    >
       <div className="absolute inset-0 grid-background opacity-10" />
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,16 +56,16 @@ const CodingSkillsSection = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
               viewport={{ once: true }}
-              whileHover={{ 
-                scale: 1.05, 
+              whileHover={{
+                scale: 1.05,
                 y: -5,
-                transition: { duration: 0.2 }
+                transition: { duration: 0.2 },
               }}
               className="group relative bg-card rounded-2xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 cursor-default overflow-hidden"
             >
               {/* Gradient overlay on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              
+
               {/* Skill name */}
               <div className="relative z-10 text-center">
                 <span className="font-medium text-foreground group-hover:text-primary transition-colors duration-300">
