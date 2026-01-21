@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { ArrowUpRight, Github } from 'lucide-react';
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github } from "lucide-react";
 
 interface Project {
   id: number;
@@ -22,14 +22,15 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
     <motion.article
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
-      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-50px" }}
       className="group"
     >
       <div className="relative bg-card rounded-2xl overflow-hidden card-shadow transition-all duration-500 hover:card-shadow-hover">
-        
         {/* Image */}
-        <div className={`relative h-64 md:h-80 overflow-hidden ${project.color}`}>
+        <div
+          className={`relative h-64 md:h-80 overflow-hidden ${project.color}`}
+        >
           <motion.img
             src={project.image}
             alt={project.title}
@@ -41,7 +42,6 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
           {/* Action buttons */}
           <div className="absolute top-4 right-4 flex gap-2">
-            
             {/* Live link */}
             <motion.a
               href={project.liveUrl}
@@ -99,7 +99,6 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
             ))}
           </div>
         </div>
-
       </div>
     </motion.article>
   );
