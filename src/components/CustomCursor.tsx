@@ -1,5 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useReducedMotion,
+} from "framer-motion";
 
 type Props = {
   src?: string;
@@ -24,7 +29,7 @@ export default function CustomCursor({
 
   const springConfig = useMemo(
     () => ({ stiffness: 500, damping: 40, mass: 0.6 }),
-    []
+    [],
   );
 
   const springX = useSpring(x, springConfig);
@@ -38,7 +43,8 @@ export default function CustomCursor({
       const smallScreen = window.innerWidth < 768;
       const coarse = window.matchMedia("(pointer: coarse)").matches;
       const noHover = window.matchMedia("(hover: none)").matches;
-      const shouldEnable = !smallScreen && !coarse && !noHover && !prefersReducedMotion;
+      const shouldEnable =
+        !smallScreen && !coarse && !noHover && !prefersReducedMotion;
       setEnabled(shouldEnable);
       document.body.classList.toggle("custom-cursor-active", shouldEnable);
     };
@@ -87,7 +93,7 @@ export default function CustomCursor({
           "nav [role='button']",
           ".interactive",
           "[data-interactive='true']",
-        ].join(",")
+        ].join(","),
       );
       const isInteractive = Boolean(interactive);
       setHoveringInteractive(isInteractive);
@@ -105,7 +111,16 @@ export default function CustomCursor({
       window.removeEventListener("mouseup", onUp);
       window.removeEventListener("mouseover", onOver);
     };
-  }, [enabled, clickScale, hoverScale, hoveringInteractive, opacity, scale, x, y]);
+  }, [
+    enabled,
+    clickScale,
+    hoverScale,
+    hoveringInteractive,
+    opacity,
+    scale,
+    x,
+    y,
+  ]);
 
   if (!enabled) return null;
 
