@@ -177,8 +177,14 @@ const ProjectCard = ({
   index: number;
 }) => {
   const [hovered, setHovered] = useState(false);
+  const [tapped, setTapped] = useState(false);
+  const active = hovered || tapped;
   const cardClass = "w-[80vw] sm:w-[360px] md:w-[400px]";
   const imgHeight = "h-[44vw] sm:h-48 md:h-52";
+
+  const handleTap = () => {
+    setTapped((prev) => !prev);
+  };
 
   return (
     <motion.div
@@ -188,13 +194,14 @@ const ProjectCard = ({
       viewport={{ once: true, margin: "0px -40px" }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
-      className={`group relative flex-shrink-0 ${cardClass} rounded-2xl md:rounded-[26px] overflow-hidden bg-card border border-border/40 cursor-default flex flex-col`}
+      onTap={handleTap}
+      className={`group relative flex-shrink-0 ${cardClass} rounded-2xl md:rounded-[26px] overflow-hidden bg-card border border-border/40 cursor-pointer flex flex-col`}
       style={{
-        boxShadow: hovered
+        boxShadow: active
           ? `0 20px 44px -8px ${project.accent}2e, 0 0 0 1px ${project.accent}20`
           : "0 2px 14px -2px rgba(0,0,0,0.10)",
-        transition: "box-shadow 0.4s ease, transform 0.3s ease",
-        transform: hovered ? "translateY(-6px) scale(1.01)" : "translateY(0) scale(1)",
+        transition: "box-shadow 0.35s ease, transform 0.25s ease",
+        transform: active ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
       }}
     >
       {/* Accent top border */}
@@ -202,7 +209,7 @@ const ProjectCard = ({
         className="absolute top-0 left-0 right-0 h-[2px] z-20 transition-opacity duration-300"
         style={{
           background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)`,
-          opacity: hovered ? 1 : 0,
+          opacity: active ? 1 : 0,
         }}
       />
 
@@ -212,7 +219,7 @@ const ProjectCard = ({
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover"
-          animate={{ scale: hovered ? 1.07 : 1 }}
+          animate={{ scale: active ? 1.07 : 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         />
 
@@ -222,7 +229,7 @@ const ProjectCard = ({
           style={{
             background:
               "linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.06) 55%, transparent 100%)",
-            opacity: hovered ? 1 : 0.45,
+            opacity: active ? 1 : 0.45,
           }}
         />
 
@@ -231,7 +238,7 @@ const ProjectCard = ({
           className="absolute inset-0 transition-opacity duration-500"
           style={{
             background: `linear-gradient(135deg, ${project.accent}1c, transparent)`,
-            opacity: hovered ? 1 : 0,
+            opacity: active ? 1 : 0,
           }}
         />
 
@@ -256,7 +263,7 @@ const ProjectCard = ({
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          animate={{ opacity: hovered ? 1 : 0.72, y: hovered ? 0 : 3 }}
+          animate={{ opacity: active ? 1 : 0.72, y: active ? 0 : 3 }}
           transition={{ duration: 0.2 }}
           className="absolute bottom-3 right-3 z-10 flex items-center gap-1 px-3 py-1.5 rounded-full text-[11px] font-semibold text-white"
           style={{
