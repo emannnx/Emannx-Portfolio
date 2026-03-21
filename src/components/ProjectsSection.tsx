@@ -44,7 +44,7 @@ const projects = [
     tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
     image: ramonikproject,
     liveUrl: "https://ramoniktravel.com/",
-    accent: "#f59e0b",
+    accent: "#052861",
     size: "medium",
   },
   {
@@ -56,7 +56,7 @@ const projects = [
     tags: ["React", "TypeScript", "CSS", "Firebase"],
     image: projectResumeAI,
     liveUrl: "https://emannx-resume-ai.vercel.app/",
-    accent: "#8b5cf6",
+    accent: "#22A959",
     size: "medium",
   },
   {
@@ -69,7 +69,7 @@ const projects = [
     image: xSpace,
     liveUrl: "https://x-space-emannx.vercel.app/",
     accent: "#ec4899",
-    size: "small",
+    size: "medium",
   },
   {
     id: 6,
@@ -81,7 +81,7 @@ const projects = [
     image: fgClothing,
     liveUrl: "https://fg-clothings.netlify.app/",
     accent: "#f97316",
-    size: "small",
+    size: "medium",
   },
   {
     id: 7,
@@ -93,7 +93,7 @@ const projects = [
     image: sushiMan,
     liveUrl: "https://sushiman-emannx.vercel.app/",
     accent: "#ef4444",
-    size: "small",
+    size: "medium",
   },
   {
     id: 8,
@@ -104,7 +104,7 @@ const projects = [
     tags: ["Spring Boot", "MongoDB"],
     image: springImage,
     liveUrl: "https://nutritional-guide.onrender.com",
-    accent: "#06b6d4",
+    accent: "#010202",
     size: "small",
   },
   {
@@ -116,7 +116,7 @@ const projects = [
     tags: ["Spring Boot", "MongoDB"],
     image: springImage,
     liveUrl: "https://mood-tracker-1zvf.onrender.com",
-    accent: "#a855f7",
+    accent: "#010202",
     size: "small",
   },
 ];
