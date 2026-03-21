@@ -2,6 +2,17 @@ import { motion } from "framer-motion";
 import avatar from "@/assets/avatar.jpg";
 import hero from "@/assets/myImage2.jpeg";
 
+const glass = {
+  backdropFilter: "blur(28px) saturate(190%) brightness(1.05)",
+  WebkitBackdropFilter: "blur(28px) saturate(190%) brightness(1.05)",
+  background: "rgba(255,255,255,0.52)",
+  border: "1px solid rgba(255,255,255,0.60)",
+  boxShadow:
+    "0 4px 6px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.08), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)",
+} as React.CSSProperties;
+
+
+
 const HeroSection = () => {
   return (
     <section
@@ -44,11 +55,20 @@ const HeroSection = () => {
           {/* Text Content */}
           <div className="flex-1 text-center lg:text-left">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              transition={{ duration: 0.6 }}
+              className="mb-7"
             >
-              <span className="inline-block px-4 py-2 mb-6 text-sm font-medium text-accent-foreground bg-accent rounded-full">
+              <span
+                className="lg-hero-glass inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full"
+                style={{ ...glass, color: "hsl(var(--foreground))" }}
+              >
+                <motion.span
+                  className="w-1.5 h-1.5 rounded-full bg-current"
+                  animate={{ opacity: [1, 0.3, 1] }}
+                  transition={{ repeat: Infinity, duration: 2 }}
+                />
                 Software Engineer
               </span>
             </motion.div>
