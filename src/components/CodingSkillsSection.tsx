@@ -1,23 +1,26 @@
 import { motion } from "framer-motion";
 
-const codingSkills = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "TypeScript",
-  "Java",
-  "React",
-  "React Native",
-  "Expo",
-  "NativeWind",
-  "Tailwind CSS",
-  "Node.js",
-  "Firebase",
-  "REST APIs",
-  "Git & GitHub",
-];
+const codingSkills = {
+  languages: ["HTML", "CSS", "JavaScript", "TypeScript", "Java"],
+  frameworks: ["React", "React Native", "Next.js", "Expo", "Express.js", "Node.js"],
+  styling: ["Tailwind CSS", "NativeWind"],
+  databases: ["Firebase", "MongoDB", "PostgreSQL", "Supabase"],
+  devops: ["Docker", "AWS", "Git & GitHub"],
+  other: ["REST APIs"],
+};
+
+const categoryLabels: Record<keyof typeof codingSkills, string> = {
+  languages: "Languages",
+  frameworks: "Frameworks & Runtimes",
+  styling: "Styling",
+  databases: "Databases & Backend",
+  devops: "DevOps & Tools",
+  other: "Other",
+};
 
 const CodingSkillsSection = () => {
+  let globalIndex = 0;
+
   return (
     <section
       id="coding-skills"
@@ -42,45 +45,62 @@ const CodingSkillsSection = () => {
           </p>
         </motion.div>
 
-        <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-5xl mx-auto"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          {codingSkills.map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.05, duration: 0.3 }}
-              viewport={{ once: true }}
-              whileHover={{
-                scale: 1.05,
-                y: -5,
-                transition: { duration: 0.2 },
-              }}
-              className="group relative bg-card rounded-2xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 cursor-default overflow-hidden"
-            >
-              {/* Gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-              {/* Skill name */}
-              <div className="relative z-10 text-center">
-                <span className="font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-                  {skill}
-                </span>
-              </div>
-
-              {/* Decorative dot */}
+        <div className="max-w-5xl mx-auto space-y-10">
+          {(Object.keys(codingSkills) as Array<keyof typeof codingSkills>).map(
+            (category) => (
               <motion.div
-                className="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary transition-colors duration-300"
-                whileHover={{ scale: 1.5 }}
-              />
-            </motion.div>
-          ))}
-        </motion.div>
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+              >
+                {/* Category label */}
+                <h3 className="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-4 pl-1">
+                  {categoryLabels[category]}
+                </h3>
+
+                {/* Skills grid */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {codingSkills[category].map((skill) => {
+                    const index = globalIndex++;
+                    return (
+                      <motion.div
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.05, duration: 0.3 }}
+                        viewport={{ once: true }}
+                        whileHover={{
+                          scale: 1.05,
+                          y: -5,
+                          transition: { duration: 0.2 },
+                        }}
+                        className="group relative bg-card rounded-2xl p-6 card-shadow hover:card-shadow-hover transition-all duration-300 cursor-default overflow-hidden"
+                      >
+                        {/* Gradient overlay on hover */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                        {/* Skill name */}
+                        <div className="relative z-10 text-center">
+                          <span className="font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+                            {skill}
+                          </span>
+                        </div>
+
+                        {/* Decorative dot */}
+                        <motion.div
+                          className="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary/20 group-hover:bg-primary transition-colors duration-300"
+                          whileHover={{ scale: 1.5 }}
+                        />
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )
+          )}
+        </div>
       </div>
     </section>
   );
