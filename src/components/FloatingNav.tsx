@@ -1,13 +1,14 @@
 import { motion, AnimatePresence, useSpring, useMotionValue } from "framer-motion";
-import { Home, Briefcase, User, Mail, Code2, Layers } from "lucide-react";
+import { Home, Briefcase, User, Mail, Code2, Layers, Github } from "lucide-react";
 import { useState, useRef } from "react";
 
 const navItems = [
   { id: "hero",                icon: Home,     label: "Home"   },
   { id: "projects",            icon: Briefcase,label: "Work"   },
   { id: "about",               icon: User,     label: "About"  },
-  { id: "coding-skills",       icon: Code2,    label: "Code"   },
+  // { id: "coding-skills",       icon: Code2,    label: "Code"   },
   { id: "professional-skills", icon: Layers,   label: "Skills" },
+  { id: "github",              icon: Github,   label: "GitHub" },
   { id: "contact",             icon: Mail,     label: "Contact"},
 ];
 
