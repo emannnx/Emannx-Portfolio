@@ -1,136 +1,138 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { ExternalLink } from "lucide-react";
-import projectResumeAI from "@/projectimages/resume.png";
-import nexxproject from "@/projectimages/nexx.png";
-import ramonikproject from "@/projectimages/ramoniktravel.png";
-import healthCareSystem from "@/projectimages/Healthhub.png";
-import sushiMan from "@/projectimages/sushiman.png";
-import springImage from "@/projectimages/SpringBoot.jpg";
-import fgClothing from "@/projectimages/fgclothings.png";
-import xSpace from "@/projectimages/x-space.png";
 
 const projects = [
   {
     id: 1,
-    title: "HealthHub",
-    subtitle: "Healthcare Management System",
+    title: "LearnX",
+    subtitle: "Learning Management App",
     description:
-      "A full-stack healthcare platform handling appointments, patient records, and service management — built across React, Spring Boot, MongoDB and SQL Server.",
-    tags: ["React", "TypeScript", "Spring Boot", "MongoDB", "Tailwind CSS"],
-    image: healthCareSystem,
-    liveUrl: "https://health-care-systems-nine.vercel.app/",
-    accent: "#3b82f6",
-    size: "large",
+      "A comprehensive LMS for students to organize courses, track assignments, and collaborate — built with React, TypeScript, and Tailwind CSS.",
+    tags: ["React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://learnx-chi.vercel.app/",
+    accent: "#0A0A0A",
   },
   {
     id: 2,
-    title: "NEXX Global",
-    subtitle: "Crypto Trading Platform",
+    title: "HealthHub",
+    subtitle: "Healthcare Management System",
     description:
-      "A forward-thinking fintech product delivering smart crypto trading solutions for individuals and businesses — live in production with real users.",
-    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "API"],
-    image: nexxproject,
-    liveUrl: "https://www.nexxglobal.net/",
-    accent: "#10b981",
-    size: "large",
+      "A full-stack healthcare platform handling appointments, patient records, and service management — built across React, Spring Boot, MongoDB, and SQL Server.",
+    tags: ["React", "TypeScript", "Spring Boot", "MongoDB", "Tailwind CSS"],
+    liveUrl: "https://health-care-systems-nine.vercel.app/",
+    accent: "#3b82f6",
   },
   {
     id: 3,
+    title: "NEXX Global",
+    subtitle: "Crypto Trading Platform",
+    description:
+      "A fintech product delivering smart crypto trading solutions for individuals and businesses — live in production with real users.",
+    tags: ["React", "TypeScript", "Tailwind CSS", "Firebase", "API"],
+    liveUrl: "https://www.nexxglobal.net/",
+    accent: "#10b981",
+  },
+  {
+    id: 4,
     title: "Ramonik Travels",
     subtitle: "Travel & Tourism Platform",
     description:
       "A production travel booking platform creating seamless, personalized journeys — deployed for a real business with active customers.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-    image: ramonikproject,
     liveUrl: "https://ramoniktravel.com/",
     accent: "#052861",
-    size: "medium",
   },
   {
-    id: 4,
+    id: 5,
     title: "ResumeAI",
     subtitle: "AI Resume Builder",
     description:
       "A fully customizable resume builder with real-time preview, layout control, and export — clean professional output with modern UX.",
     tags: ["React", "TypeScript", "CSS", "Firebase"],
-    image: projectResumeAI,
     liveUrl: "https://emannx-resume-ai.vercel.app/",
     accent: "#22A959",
-    size: "medium",
   },
   {
-    id: 5,
+    id: 6,
     title: "X-Space",
     subtitle: "Digital Agency Landing",
     description:
       "A polished digital agency site showcasing innovative solutions for businesses to connect, create, and grow.",
     tags: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-    image: xSpace,
     liveUrl: "https://x-space-emannx.vercel.app/",
     accent: "#ec4899",
-    size: "medium",
   },
   {
-    id: 6,
+    id: 7,
     title: "FG Clothings",
     subtitle: "Fashion Look Book",
     description:
       "A curated fashion look book with seasonal collections and contemporary style inspiration.",
     tags: ["React", "TypeScript", "Tailwind CSS"],
-    image: fgClothing,
     liveUrl: "https://fg-clothings.netlify.app/",
     accent: "#f97316",
-    size: "medium",
-  },
-  {
-    id: 7,
-    title: "Sushiman",
-    subtitle: "Restaurant Experience",
-    description:
-      "A handcrafted Japanese restaurant site with immersive UI built in pure vanilla JS — no frameworks.",
-    tags: ["JavaScript", "HTML", "CSS"],
-    image: sushiMan,
-    liveUrl: "https://sushiman-emannx.vercel.app/",
-    accent: "#ef4444",
-    size: "medium",
   },
   {
     id: 8,
+    title: "Sushiman",
+    subtitle: "Restaurant Experience",
+    description:
+      "A handcrafted Japanese restaurant site with immersive UI — built in pure vanilla JS with no frameworks.",
+    tags: ["JavaScript", "HTML", "CSS"],
+    liveUrl: "https://sushiman-emannx.vercel.app/",
+    accent: "#ef4444",
+  },
+  {
+    id: 9,
     title: "Nutrition Guide",
     subtitle: "Spring Boot REST API",
     description:
       "Personalized nutrition plans and dietary recommendations via a structured Spring Boot + MongoDB backend.",
     tags: ["Spring Boot", "MongoDB"],
-    image: springImage,
     liveUrl: "https://nutritional-guide.onrender.com",
-    accent: "#010202",
-    size: "small",
+    accent: "#6366f1",
   },
   {
-    id: 9,
+    id: 10,
     title: "Mood Tracker",
     subtitle: "Wellness API",
     description:
       "Daily emotional wellness tracking via a clean REST API — designed for integration into any frontend.",
     tags: ["Spring Boot", "MongoDB"],
-    image: springImage,
     liveUrl: "https://mood-tracker-1zvf.onrender.com",
-    accent: "#010202",
-    size: "small",
+    accent: "#8b5cf6",
   },
 ];
+
+// ─── Microlink JSON API — resolves the actual CDN screenshot URL once ─────────
+const screenshotCache = new Map<string, string>();
+
+async function fetchScreenshotUrl(siteUrl: string): Promise<string> {
+  if (screenshotCache.has(siteUrl)) return screenshotCache.get(siteUrl)!;
+  const api = `https://api.microlink.io/?url=${encodeURIComponent(siteUrl)}&screenshot=true&meta=false`;
+  const res = await fetch(api);
+  const json = await res.json();
+  const url = json?.data?.screenshot?.url ?? "";
+  if (url) screenshotCache.set(siteUrl, url);
+  return url;
+}
+
+// Kick off all fetches as soon as the module loads (parallel, cached)
+const prefetchPromises = new Map<string, Promise<string>>();
+projects.forEach((p) => {
+  prefetchPromises.set(p.liveUrl, fetchScreenshotUrl(p.liveUrl));
+});
 
 // ─── Hook: peek animation ─────────────────────────────────────────────────────
 function usePeekAnimation(
   scrollRef: React.RefObject<HTMLDivElement>,
-  hasScrolled: boolean
+  hasScrolled: boolean,
 ) {
   useEffect(() => {
     if (hasScrolled) return;
     const el = scrollRef.current;
     if (!el) return;
-
     const timer = setTimeout(() => {
       el.scrollTo({ left: 88, behavior: "smooth" });
       const snapBack = setTimeout(() => {
@@ -138,7 +140,6 @@ function usePeekAnimation(
       }, 720);
       return () => clearTimeout(snapBack);
     }, 1100);
-
     return () => clearTimeout(timer);
   }, [hasScrolled]);
 }
@@ -148,7 +149,8 @@ const ScrollHint = ({ accent }: { accent: string }) => (
   <div
     className="absolute right-0 top-0 bottom-0 w-24 pointer-events-none z-10 flex items-center justify-end pr-3"
     style={{
-      background: "linear-gradient(to right, transparent, var(--background) 80%)",
+      background:
+        "linear-gradient(to right, transparent, var(--background) 80%)",
     }}
   >
     <motion.div
@@ -178,19 +180,37 @@ const ProjectCard = ({
 }) => {
   const [hovered, setHovered] = useState(false);
   const [tapped, setTapped] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string>("");
+  const [imgLoaded, setImgLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false);
   const active = hovered || tapped;
   const cardClass = "w-[80vw] sm:w-[360px] md:w-[400px]";
   const imgHeight = "h-[44vw] sm:h-48 md:h-52";
 
-  const handleTap = () => {
-    setTapped((prev) => !prev);
-  };
+  // Resolve the prefetched CDN URL (already in-flight since module load)
+  useEffect(() => {
+    const promise = prefetchPromises.get(project.liveUrl);
+    if (!promise) return;
+    promise.then((url) => {
+      if (url) {
+        setImgSrc(url);
+      } else {
+        setImgError(true);
+      }
+    });
+  }, [project.liveUrl]);
+
+  const handleTap = () => setTapped((prev) => !prev);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.055, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.5,
+        delay: index * 0.055,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       viewport={{ once: true, margin: "0px -40px" }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
@@ -201,7 +221,9 @@ const ProjectCard = ({
           ? `0 20px 44px -8px ${project.accent}2e, 0 0 0 1px ${project.accent}20`
           : "0 2px 14px -2px rgba(0,0,0,0.10)",
         transition: "box-shadow 0.35s ease, transform 0.25s ease",
-        transform: active ? "translateY(-6px) scale(1.02)" : "translateY(0) scale(1)",
+        transform: active
+          ? "translateY(-6px) scale(1.02)"
+          : "translateY(0) scale(1)",
       }}
     >
       {/* Accent top border */}
@@ -215,13 +237,46 @@ const ProjectCard = ({
 
       {/* Image */}
       <div className={`relative ${imgHeight} overflow-hidden`}>
-        <motion.img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover"
-          animate={{ scale: active ? 1.07 : 1 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        />
+        {/* Skeleton */}
+        {!imgLoaded && !imgError && (
+          <div
+            className="absolute inset-0 animate-pulse"
+            style={{ background: `${project.accent}18` }}
+          />
+        )}
+
+        {/* Fallback */}
+        {imgError && (
+          <div
+            className="absolute inset-0 flex items-center justify-center"
+            style={{ background: `${project.accent}14` }}
+          >
+            <span
+              className="text-xs font-semibold tracking-widest uppercase opacity-50"
+              style={{ color: project.accent }}
+            >
+              {project.title}
+            </span>
+          </div>
+        )}
+
+        {imgSrc && (
+          <motion.img
+            src={imgSrc}
+            alt={project.title}
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover object-top"
+            style={{
+              opacity: imgLoaded ? 1 : 0,
+              transition: "opacity 0.4s ease",
+            }}
+            onLoad={() => setImgLoaded(true)}
+            onError={() => setImgError(true)}
+            animate={{ scale: active ? 1.07 : 1 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          />
+        )}
 
         {/* Scrim */}
         <div
@@ -257,7 +312,7 @@ const ProjectCard = ({
           </span>
         </div>
 
-        {/* Live button — partially visible on mobile, full on hover */}
+        {/* Live button */}
         <motion.a
           href={project.liveUrl}
           target="_blank"
@@ -293,9 +348,8 @@ const ProjectCard = ({
           {project.description}
         </p>
 
-        {/* Tags — truncated on small cards */}
         <div className="flex flex-wrap gap-1 mt-auto pt-2">
-          {project.tags.slice(0, project.tags.length).map((tag) => (
+          {project.tags.map((tag) => (
             <span
               key={tag}
               className="px-2 py-0.5 text-[9px] md:text-[11px] font-medium rounded-full border"
@@ -333,7 +387,6 @@ const ProjectsSection = () => {
     setScrollProgress(left / max);
     if (left > 25 && !hasScrolled) {
       setHasScrolled(true);
-      // small delay before hiding hint so fade-out is visible
       setTimeout(() => setShowHint(false), 200);
     }
   }, [hasScrolled]);
@@ -356,7 +409,6 @@ const ProjectsSection = () => {
 
   return (
     <section id="projects" className="py-20 md:py-32 relative overflow-hidden">
-      {/* Ambient blobs */}
       <div
         className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[100px] opacity-[0.05] pointer-events-none"
         style={{ background: "radial-gradient(circle, #3b82f6, #8b5cf6)" }}
@@ -367,8 +419,6 @@ const ProjectsSection = () => {
       />
 
       <div className="container mx-auto px-4 md:px-6">
-
-        {/* ── Centered header ── */}
         <motion.div
           className="flex flex-col items-center text-center mb-10 md:mb-14"
           initial={{ opacity: 0, y: 24 }}
@@ -408,10 +458,10 @@ const ProjectsSection = () => {
             transition={{ delay: 0.22, duration: 0.5 }}
             viewport={{ once: true }}
           >
-            Real products shipped for real users — from fintech platforms to healthcare systems.
+            Real products shipped for real users — from fintech platforms to
+            healthcare systems.
           </motion.p>
 
-          {/* Divider */}
           <motion.div
             className="mt-7 flex items-center gap-3"
             initial={{ opacity: 0 }}
@@ -427,7 +477,6 @@ const ProjectsSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* ── Desktop arrow controls ── */}
         <motion.div
           className="hidden md:flex items-center justify-end gap-3 mb-5"
           initial={{ opacity: 0 }}
@@ -453,9 +502,7 @@ const ProjectsSection = () => {
           </button>
         </motion.div>
 
-        {/* ── Scroll track ── */}
         <div className="relative">
-          {/* Scroll hint — fades away once user starts scrolling */}
           <AnimatePresence>
             {showHint && (
               <motion.div
@@ -485,7 +532,6 @@ const ProjectsSection = () => {
           </div>
         </div>
 
-        {/* ── Progress bar ── */}
         <motion.div
           className="mt-5 mx-auto max-w-[140px] md:max-w-xs h-[3px] rounded-full bg-border overflow-hidden"
           initial={{ opacity: 0 }}
