@@ -14,7 +14,7 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <CustomCursor src="/cursor.png" size={26} />
-      <ThreeBackground />
+      {/* <ThreeBackground /> */}
       <Toaster />
       <Sonner />
       <BrowserRouter>
