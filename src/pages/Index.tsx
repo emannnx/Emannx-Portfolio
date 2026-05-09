@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import FloatingNav from '@/components/FloatingNav';
+// HeroSection is above the fold — keep it eager
 import HeroSection from '@/components/HeroSection';
-import ProjectsSection from '@/components/ProjectsSection';
-import AboutSection from '@/components/AboutSection';
-import ProfessionalSkillsSection from '@/components/ProfessionalSkillsSection';
-import GitHubCalendarSection from '@/components/GitHubCalendarSection';
-import ContactSection from '@/components/ContactSection';
+
+// Below-fold sections are code-split so the initial bundle is smaller
+const FloatingNav = lazy(() => import('@/components/FloatingNav'));
+const ProjectsSection = lazy(() => import('@/components/ProjectsSection'));
+const AboutSection = lazy(() => import('@/components/AboutSection'));
+const ProfessionalSkillsSection = lazy(() => import('@/components/ProfessionalSkillsSection'));
+const GitHubCalendarSection = lazy(() => import('@/components/GitHubCalendarSection'));
+const ContactSection = lazy(() => import('@/components/ContactSection'));
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -47,12 +50,14 @@ const Index = () => {
       transition={{ duration: 0.45, ease: 'easeInOut' }}
     >
       <HeroSection />
-      <ProjectsSection />
-      <AboutSection />
-      <ProfessionalSkillsSection />
-      <GitHubCalendarSection username="emannnx" />
-      <ContactSection />
-      <FloatingNav activeSection={activeSection} onNavigate={handleNavigate} />
+      <Suspense fallback={null}>
+        <ProjectsSection />
+        <AboutSection />
+        <ProfessionalSkillsSection />
+        <GitHubCalendarSection username="emannnx" />
+        <ContactSection />
+        <FloatingNav activeSection={activeSection} onNavigate={handleNavigate} />
+      </Suspense>
     </motion.main>
   );
 };

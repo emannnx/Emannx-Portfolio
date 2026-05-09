@@ -33,13 +33,15 @@ function AppInner() {
 
   return (
     <>
-      <Preloader onDone={() => setPreloaded(true)} />
+      {/* Preloader sits on top (z-[10000]); content renders underneath so it's
+          already painted when the preloader wipes away — no blank flash. */}
+      {!preloaded && <Preloader onDone={() => setPreloaded(true)} />}
       <GrainOverlay />
       <CustomCursor />
       <ScrollProgress />
       <Toaster />
       <Sonner />
-      {preloaded && <AnimatedRoutes />}
+      <AnimatedRoutes />
     </>
   );
 }
