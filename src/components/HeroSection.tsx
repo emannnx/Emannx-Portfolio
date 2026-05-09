@@ -3,6 +3,7 @@ import { useState, useEffect, lazy, Suspense, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import hero from "@/assets/myImage2.jpeg";
 import { useMagnetic } from "@/hooks/useMagnetic";
+import DotMatrixPortrait from "./DotMatrixPortrait";
 
 const HeroOrb = lazy(() => import("./HeroOrb"));
 
@@ -298,10 +299,10 @@ const HeroSection = () => {
                 }}
               />
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden card-shadow">
-                <img
+                <DotMatrixPortrait
                   src={hero}
                   alt="Iman Olabode-Bello"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full"
                 />
               </div>
               {/* Decorative ring */}
