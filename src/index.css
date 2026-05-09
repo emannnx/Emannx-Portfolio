@@ -141,6 +141,51 @@
     background-clip: text;
   }
 
+  /* Hero name second line — dark charcoal, matches the heading color */
+  .hero-name-dark {
+    color: hsl(var(--foreground) / 0.78);
+  }
+
+  /* Primary CTA — dark fill, sweeps to orange on hover */
+  .hero-btn-primary {
+    background: linear-gradient(
+      to right,
+      hsl(12 76% 58%) 50%,
+      hsl(var(--foreground)) 50%
+    );
+    background-size: 200% 100%;
+    background-position: right center;
+    color: hsl(var(--background));
+    transition: background-position 0.48s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  .hero-btn-primary:hover {
+    background-position: left center;
+  }
+
+  /* Secondary CTA — outlined, fills dark on hover */
+  .hero-btn-secondary {
+    background: linear-gradient(
+      to right,
+      hsl(var(--foreground)) 50%,
+      transparent 50%
+    );
+    background-size: 200% 100%;
+    background-position: right center;
+    border: 1.5px solid hsl(var(--foreground) / 0.2);
+    color: hsl(var(--foreground));
+    transition:
+      background-position 0.48s cubic-bezier(0.76, 0, 0.24, 1),
+      color 0.48s cubic-bezier(0.76, 0, 0.24, 1),
+      border-color 0.3s;
+  }
+
+  .hero-btn-secondary:hover {
+    background-position: left center;
+    color: hsl(var(--background));
+    border-color: hsl(var(--foreground));
+  }
+
   .card-shadow {
     box-shadow: var(--shadow-card);
   }
@@ -183,4 +228,36 @@
   .body-md {
     @apply text-base text-muted-foreground leading-relaxed;
   }
+}
+
+/* ── Global micro-polish ───────────────────────────── */
+
+::selection {
+  background: hsl(12 76% 61% / 0.18);
+  color: hsl(var(--foreground));
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 99px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.45);
+}
+
+/* Keyboard focus ring — only shown for keyboard navigation */
+:focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+  border-radius: 4px;
 }

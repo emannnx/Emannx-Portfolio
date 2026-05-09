@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -7,6 +8,9 @@ import { AnimatePresence } from "framer-motion";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
+import GrainOverlay from "./components/GrainOverlay";
+import Preloader from "./components/Preloader";
+import ScrollProgress from "./components/ScrollProgress";
 import { useLenis } from "./hooks/useLenis";
 
 const queryClient = new QueryClient();
@@ -25,12 +29,17 @@ function AnimatedRoutes() {
 
 function AppInner() {
   useLenis();
+  const [preloaded, setPreloaded] = useState(false);
+
   return (
     <>
-      <CustomCursor src="/cursor.png" size={26} />
+      <Preloader onDone={() => setPreloaded(true)} />
+      <GrainOverlay />
+      <CustomCursor />
+      <ScrollProgress />
       <Toaster />
       <Sonner />
-      <AnimatedRoutes />
+      {preloaded && <AnimatedRoutes />}
     </>
   );
 }
