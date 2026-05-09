@@ -65,8 +65,14 @@ const HeroSection = () => {
   const avatarRef = useRef<HTMLDivElement>(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);
-  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [12, -12]), { stiffness: 280, damping: 28 });
-  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-12, 12]), { stiffness: 280, damping: 28 });
+  const rotateX = useSpring(useTransform(rawY, [-0.5, 0.5], [12, -12]), {
+    stiffness: 280,
+    damping: 28,
+  });
+  const rotateY = useSpring(useTransform(rawX, [-0.5, 0.5], [-12, 12]), {
+    stiffness: 280,
+    damping: 28,
+  });
 
   function handleAvatarMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     const rect = avatarRef.current?.getBoundingClientRect();
@@ -134,7 +140,7 @@ const HeroSection = () => {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white"
     >
       {/* Grid */}
       <div className="absolute inset-0 grid-background opacity-90" />
@@ -179,7 +185,7 @@ const HeroSection = () => {
         transition={{ delay: 2.4, duration: 0.8 }}
       />
       <motion.div
-        className="absolute bottom-32 left-[10%] w-32 h-32 rounded-2xl bg-primary/10 animate-float"
+        className="absolute bottom-32 left-[10%] w-32 h-32 rounded-2xl bg-primary/50 animate-float"
         style={{ animationDelay: "1s" }}
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 0.5, scale: 1 }}
@@ -287,7 +293,10 @@ const HeroSection = () => {
             onMouseMove={handleAvatarMouseMove}
             onMouseLeave={handleAvatarMouseLeave}
           >
-            <motion.div className="relative" style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}>
+            <motion.div
+              className="relative"
+              style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            >
               {/* Glow behind avatar */}
               <div
                 className="absolute inset-0 rounded-full pointer-events-none"
