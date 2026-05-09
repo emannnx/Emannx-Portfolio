@@ -1,7 +1,11 @@
+import type { CSSProperties } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import avatar from "@/assets/avatar.jpg";
 import hero from "@/assets/myImage2.jpeg";
-import ThreeBackground from "./ThreeBackground";
+
+const LINE1 = "Iman";
+const LINE2 = "Olabode Bello";
+const TOTAL = LINE1.length + LINE2.length;
 
 const glass = {
   backdropFilter: "blur(28px) saturate(190%) brightness(1.05)",
@@ -10,9 +14,47 @@ const glass = {
   border: "1px solid rgba(255,255,255,0.60)",
   boxShadow:
     "0 4px 6px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.08), inset 0 1.5px 0 rgba(255,255,255,1), inset 0 -1px 0 rgba(0,0,0,0.03)",
-} as React.CSSProperties;
+} as CSSProperties;
+
+const Caret = () => (
+  <motion.span
+    aria-hidden="true"
+    animate={{ opacity: [1, 1, 0, 0] }}
+    transition={{
+      duration: 1,
+      repeat: Infinity,
+      ease: "linear",
+      times: [0, 0.5, 0.5, 1],
+    }}
+    style={{
+      display: "inline-block",
+      width: "7px",
+      height: "0.8em",
+      background: "#4A4A52",
+      marginLeft: "4px",
+      verticalAlign: "baseline",
+      borderRadius: "1px",
+      position: "relative",
+      bottom: "-0.05em",
+    }}
+  />
+);
 
 const HeroSection = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (count >= TOTAL) return;
+    const delay = count === 0 ? 600 : 90;
+    const t = setTimeout(() => setCount((c) => c + 1), delay);
+    return () => clearTimeout(t);
+  }, [count]);
+
+  const line1 = LINE1.slice(0, Math.min(count, LINE1.length));
+  const line2 =
+    count > LINE1.length ? LINE2.slice(0, count - LINE1.length) : "";
+  const isDone = count >= TOTAL;
+
   return (
     <section
       id="hero"
@@ -20,9 +62,6 @@ const HeroSection = () => {
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-90" />
-
-      {/* ── Three.js animated geometry ── */}
-      {/* <ThreeBackground /> */}
 
       {/* Floating geometric shapes */}
       <motion.div
@@ -63,7 +102,7 @@ const HeroSection = () => {
               className="mb-7"
             >
               <span
-                className="lg-hero-glass inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full"
+                className="inline-flex items-center gap-2 px-4 py-2 text-xs font-bold tracking-widest uppercase rounded-full"
                 style={{ ...glass, color: "hsl(var(--foreground))" }}
               >
                 <motion.span
@@ -75,16 +114,16 @@ const HeroSection = () => {
               </span>
             </motion.div>
 
-            <motion.h1
-              className="heading-xl mb-6"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-            >
-              Iman
-              <br />
-              <span className="text-gradient">Olabode Bello</span>
-            </motion.h1>
+            <h1 className="heading-xl mb-6">
+              <span className="block min-h-[1em]">
+                {line1}
+                {!isDone && count <= LINE1.length && <Caret />}
+              </span>
+              <span className="text-gradient block min-h-[1em]">
+                {line2}
+                {count > LINE1.length && <Caret />}
+              </span>
+            </h1>
 
             <motion.p
               className="body-lg max-w-lg mx-auto lg:mx-0 mb-8"
