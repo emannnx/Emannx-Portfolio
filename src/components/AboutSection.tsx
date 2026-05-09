@@ -1,20 +1,22 @@
 import { motion } from "framer-motion";
 import { Code, Cpu, GitBranch, Database, Cloud, Terminal } from "lucide-react";
+import { useSplitText } from "@/hooks/useSplitText";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const skills = [
   { icon: Code, name: "TypeScript", description: "React, Node, Next.js" },
   { icon: Cpu, name: "System Design", description: "Microservices, APIs" },
-  {
-    icon: GitBranch,
-    name: "Git & CI/CD",
-    description: "GitHub Actions, Docker",
-  },
+  { icon: GitBranch, name: "Git & CI/CD", description: "GitHub Actions, Docker" },
   { icon: Database, name: "Databases", description: "PostgreSQL, Redis" },
   { icon: Cloud, name: "Cloud", description: "AWS, Vercel, Serverless" },
   { icon: Terminal, name: "DevOps", description: "Monitoring, IaC, k8s" },
 ];
 
 const AboutSection = () => {
+  const headingRef = useSplitText<HTMLHeadingElement>({ stagger: 0.07, duration: 0.9 });
+  const p1Ref = useScrollReveal<HTMLParagraphElement>({ delay: 0.1, y: 30 });
+  const p2Ref = useScrollReveal<HTMLParagraphElement>({ delay: 0.2, y: 30 });
+
   return (
     <section id="about" className="py-24 md:py-32 bg-secondary/30 relative">
       {/* Subtle grid pattern */}
@@ -32,28 +34,28 @@ const AboutSection = () => {
             <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-accent-foreground bg-accent rounded-full">
               About Me
             </span>
-            <h2 className="heading-lg mb-6">
+            <h2 ref={headingRef} className="heading-lg mb-6">
               Building Scalable
               <br />
               Software Solutions
             </h2>
             <div className="space-y-4 body-md">
-  <p>
-    I'm a Software Engineer with a background in MMS Software Engineering from NIIT,
-    specializing in building modern web and mobile applications. My stack spans
-    React, Next.js, TypeScript, Express.js, React Native, and Spring Boot with
-    Firebase powering auth and real-time data, and Tailwind CSS keeping interfaces
-    clean and responsive.
-  </p>
-  <p>
-    I care about turning complex ideas into reliable, production-ready products that
-    feel as good as they perform. Whether it's frontend, backend, or deployment, I
-    focus on writing code that scales and design that resonates always with an eye
-    toward what's next.
-  </p>
-</div>
-
-           
+              <p ref={p1Ref}>
+                I'm a Software Engineer with a background in MMS Software
+                Engineering from NIIT, specializing in building modern web and
+                mobile applications. My stack spans React, Next.js, TypeScript,
+                Express.js, React Native, and Spring Boot with Firebase powering
+                auth and real-time data, and Tailwind CSS keeping interfaces
+                clean and responsive.
+              </p>
+              <p ref={p2Ref}>
+                I care about turning complex ideas into reliable,
+                production-ready products that feel as good as they perform.
+                Whether it's frontend, backend, or deployment, I focus on
+                writing code that scales and design that resonates always with
+                an eye toward what's next.
+              </p>
+            </div>
           </motion.div>
 
           {/* Skills Grid */}
