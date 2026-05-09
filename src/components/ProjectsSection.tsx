@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect, useCallback, useMemo } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { ExternalLink } from "lucide-react";
+import { useSplitText } from "@/hooks/useSplitText";
 
 const projects = [
   {
@@ -183,9 +184,34 @@ const ProjectCard = ({
   const [imgSrc, setImgSrc] = useState<string>("");
   const [imgLoaded, setImgLoaded] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [shine, setShine] = useState({ x: 50, y: 50 });
+  const cardRef = useRef<HTMLDivElement>(null);
   const active = hovered || tapped;
   const cardClass = "w-[80vw] sm:w-[360px] md:w-[400px]";
   const imgHeight = "h-[44vw] sm:h-48 md:h-52";
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width) * 100;
+    const y = ((e.clientY - r.top) / r.height) * 100;
+    setShine({ x, y });
+    const tiltX = ((e.clientY - r.top) / r.height - 0.5) * -10;
+    const tiltY = ((e.clientX - r.left) / r.width - 0.5) * 10;
+    el.style.transform = `perspective(900px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateZ(6px)`;
+  };
+
+  const handleMouseLeave = () => {
+    const el = cardRef.current;
+    if (!el) return;
+    el.style.transition = "transform 0.6s cubic-bezier(0.23,1,0.32,1)";
+    el.style.transform =
+      "perspective(900px) rotateX(0deg) rotateY(0deg) translateZ(0px)";
+    setTimeout(() => {
+      if (el) el.style.transition = "";
+    }, 600);
+  };
 
   // Resolve the prefetched CDN URL (already in-flight since module load)
   useEffect(() => {
@@ -204,6 +230,7 @@ const ProjectCard = ({
 
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 36 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
@@ -215,17 +242,24 @@ const ProjectCard = ({
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       onTap={handleTap}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       className={`group relative flex-shrink-0 ${cardClass} rounded-2xl md:rounded-[26px] overflow-hidden bg-card border border-border/40 cursor-pointer flex flex-col`}
       style={{
         boxShadow: active
           ? `0 20px 44px -8px ${project.accent}2e, 0 0 0 1px ${project.accent}20`
           : "0 2px 14px -2px rgba(0,0,0,0.10)",
-        transition: "box-shadow 0.35s ease, transform 0.25s ease",
-        transform: active
-          ? "translateY(-6px) scale(1.02)"
-          : "translateY(0) scale(1)",
+        willChange: "transform",
+        transformStyle: "preserve-3d",
       }}
     >
+      {/* Shine / glare overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none z-30 rounded-2xl md:rounded-[26px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle at ${shine.x}% ${shine.y}%, rgba(255,255,255,0.16) 0%, transparent 65%)`,
+        }}
+      />
       {/* Accent top border */}
       <div
         className="absolute top-0 left-0 right-0 h-[2px] z-20 transition-opacity duration-300"
@@ -371,6 +405,7 @@ const ProjectCard = ({
 // ─── Section ──────────────────────────────────────────────────────────────────
 const ProjectsSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const headingRef = useSplitText<HTMLHeadingElement>({ stagger: 0.08, duration: 0.9 });
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -441,15 +476,12 @@ const ProjectsSection = () => {
             Selected Work
           </motion.span>
 
-          <motion.h2
+          <h2
+            ref={headingRef}
             className="heading-lg mb-3 leading-tight"
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15, duration: 0.5 }}
-            viewport={{ once: true }}
           >
             Featured Projects
-          </motion.h2>
+          </h2>
 
           <motion.p
             className="body-md text-muted-foreground max-w-[300px] sm:max-w-sm md:max-w-lg leading-relaxed"

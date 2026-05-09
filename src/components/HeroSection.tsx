@@ -1,7 +1,10 @@
 import type { CSSProperties } from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import hero from "@/assets/myImage2.jpeg";
+import { useMagnetic } from "@/hooks/useMagnetic";
+
+const HeroOrb = lazy(() => import("./HeroOrb"));
 
 const LINE1 = "Iman";
 const LINE2 = "Olabode Bello";
@@ -42,6 +45,8 @@ const Caret = () => (
 
 const HeroSection = () => {
   const [count, setCount] = useState(0);
+  const btnPrimaryRef = useMagnetic<HTMLAnchorElement>({ strength: 0.3 });
+  const btnSecondaryRef = useMagnetic<HTMLAnchorElement>({ strength: 0.3 });
 
   useEffect(() => {
     if (count >= TOTAL) return;
@@ -62,6 +67,11 @@ const HeroSection = () => {
     >
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background opacity-90" />
+
+      {/* 3D hero orb — lazy-loaded, desktop only */}
+      <Suspense fallback={null}>
+        <HeroOrb />
+      </Suspense>
 
       {/* Floating geometric shapes */}
       <motion.div
@@ -143,14 +153,18 @@ const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
             >
               <a
+                ref={btnPrimaryRef}
                 href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-foreground text-background rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                style={{ willChange: "transform" }}
               >
                 View Projects
               </a>
               <a
+                ref={btnSecondaryRef}
                 href="#contact"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground rounded-full font-medium transition-all duration-300 hover:bg-secondary"
+                style={{ willChange: "transform" }}
               >
                 Get in Touch
               </a>
