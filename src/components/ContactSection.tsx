@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Twitter, ArrowUpRight, Phone } from "lucide-react";
+import { Mail, Link, ArrowUpRight, Phone } from "lucide-react";
+import { useSplitText } from "@/hooks/useSplitText";
+import { useMagnetic } from "@/hooks/useMagnetic";
 
 const socialLinks = [
   {
@@ -9,7 +11,7 @@ const socialLinks = [
     username: "imanolabodebello8@gmail.com",
   },
   {
-    icon: Linkedin,
+    icon: Link,
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/iman-olabode-bello/",
     username: "linkedin.com/in/Developer",
@@ -23,6 +25,9 @@ const socialLinks = [
 ];
 
 const ContactSection = () => {
+  const headingRef = useSplitText<HTMLHeadingElement>({ stagger: 0.08, duration: 0.9 });
+  const ctaRef = useMagnetic<HTMLAnchorElement>({ strength: 0.28 });
+
   return (
     <section id="contact" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-6">
@@ -36,14 +41,14 @@ const ContactSection = () => {
           <span className="inline-block px-4 py-2 mb-4 text-sm font-medium text-accent-foreground bg-accent rounded-full">
             Get in Touch
           </span>
-          <h2 className="heading-lg mb-6">
+          <h2 ref={headingRef} className="heading-lg mb-6">
             Let's Create
             <br />
             Something Amazing
           </h2>
           <p className="body-lg mb-12">
-            Have a project in mind? I'd love to hear about it. Let's discuss how
-            we can work together to bring your vision to life.
+            Have a project in mind? I'd love to hear about it. Let's discuss
+            how we can work together to bring your vision to life.
           </p>
 
           {/* Contact Links */}
@@ -78,8 +83,9 @@ const ContactSection = () => {
             })}
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Button — magnetic */}
           <motion.a
+            ref={ctaRef}
             href="mailto:imanolabodebello8@gmail.com"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -87,6 +93,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
             whileHover={{ scale: 1.05 }}
             className="inline-flex items-center gap-2 px-8 py-4 bg-foreground text-background rounded-full font-medium text-lg transition-shadow duration-300 hover:shadow-xl"
+            style={{ willChange: "transform" }}
           >
             Start a Conversation
             <ArrowUpRight className="w-5 h-5" />
