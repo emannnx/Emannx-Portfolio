@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound";
 import CustomCursor from "./components/CustomCursor";
 import GrainOverlay from "./components/GrainOverlay";
 import Preloader from "./components/Preloader";
-import ScrollProgress from "./components/ScrollProgress";
 import { useLenis } from "./hooks/useLenis";
 
 const queryClient = new QueryClient();
@@ -38,7 +37,6 @@ function AppInner() {
       {!preloaded && <Preloader onDone={() => setPreloaded(true)} />}
       <GrainOverlay />
       <CustomCursor />
-      <ScrollProgress />
       <Toaster />
       <Sonner />
       <AnimatedRoutes />
