@@ -3,15 +3,30 @@
     - appcat
 - .gitignore
 - bun.lockb
+- CLAUDE.md
 - components.json
+- dist
+  - assets
+    - HeroOrb-DmfBRb9a.js
+    - icons-0vYYmLc9.png
+    - index-BTfQMf_e.css
+    - index-DGR4Sdan.js
+    - myImage2-BVOYpD9n.jpeg
+    - Tooltip-CX2cJQ7a-BJGEdacV.js
+  - cursor.png
+  - index.html
+  - placeholder.svg
+  - robots.txt
 - eslint.config.js
 - index.html
 - netlify.toml
 - package-lock.json
 - package.json
 - postcss.config.js
+- project_structure.text
 - public
   - cursor.png
+  - Manifest.json
   - placeholder.svg
   - robots.txt
 - README.md
@@ -20,6 +35,7 @@
   - App.tsx
   - assets
     - avatar.jpg
+    - emannx_logo_final.png
     - icons.png
     - myImage2.jpeg
     - myImage22.jpg
@@ -32,13 +48,19 @@
     - CodingSkillsSection.tsx
     - ContactSection.tsx
     - CustomCursor.tsx
+    - DotMatrixPortrait.tsx
     - FloatingNav.tsx
     - GitHubCalendarSection.tsx
+    - GrainOverlay.tsx
+    - HeroOrb.tsx
     - HeroSection.tsx
     - NavLink.tsx
+    - Preloader.tsx
     - ProfessionalSkillsSection.tsx
     - ProjectCard.tsx
     - ProjectsSection.tsx
+    - ScrollProgress.tsx
+    - ThreeBackground.tsx
     - ui
       - accordion.tsx
       - alert-dialog.tsx
@@ -92,6 +114,10 @@
   - hooks
     - use-mobile.tsx
     - use-toast.ts
+    - useLenis.ts
+    - useMagnetic.ts
+    - useScrollReveal.ts
+    - useSplitText.ts
   - index.css
   - lib
     - utils.ts
